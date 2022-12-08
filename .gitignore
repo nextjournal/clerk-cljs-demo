@@ -1,0 +1,10 @@
+*.iml
+.cpcache
+.shadow-cljs
+.clerk
+
+.nrepl-port
+.idea
+.package-lock.json
+public/js
+node_modules

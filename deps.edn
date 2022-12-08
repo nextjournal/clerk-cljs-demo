@@ -1,0 +1,12 @@
+{:paths ["src" "notebooks"]
+ :deps {io.github.nextjournal/clerk {:git/sha "d960dd73a71cfa97c5fd01ca9224d0f291e0c0fd"}}
+ :aliases
+ {:dev {:extra-paths ["dev"]
+        :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"/js/viewer.js\"}"]}
+
+  :shadow {:jvm-opts ["-Dpolyglot.engine.WarnInterpreterOnly=false" "-XX:-OmitStackTraceInFastThrow"]
+           :main-opts ["-m" "shadow.cljs.devtools.cli" "watch" "viewer"]
+           :extra-deps {io.github.nextjournal/clerk.render
+                        {:git/url "https://github.com/nextjournal/clerk"
+                         :git/sha "d960dd73a71cfa97c5fd01ca9224d0f291e0c0fd"
+                         :deps/root "render"}}}}}

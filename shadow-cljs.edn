@@ -1,0 +1,8 @@
+{:deps {:aliases [:sci]}
+ :builds {:viewer {:target :esm
+                   :runtime :browser
+                   :output-dir "public/js"
+                   :release {:output-dir "build/"}
+                   :compiler-options {:source-map true}
+                   :modules {:viewer {:entries [clerk-cljs-demo.sci-env-ext]}}
+                   :js-options {:output-feature-set :es8}}}}
