@@ -1,8 +1,6 @@
 name: Publish to Pages
-on:
-  push:
-    branches:
-      - public-release
+on: push
+
 jobs:
   static-build:
     runs-on: ubuntu-latest
