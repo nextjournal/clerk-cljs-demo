@@ -1,8 +1,8 @@
-{:deps {:aliases [:sci]}
- :builds {:viewer {:target :esm
+{:builds {:viewer {:target :esm
                    :runtime :browser
                    :output-dir "public/js"
-                   :release {:output-dir "build/"}
+                   :release {:output-dir "public/build/"}
                    :compiler-options {:source-map true}
-                   :modules {:viewer {:entries [clerk-cljs-demo.sci-env-ext]}}
+                   :modules {:viewer {:entries [clerk-cljs-demo.sci-env-ext
+                                                nextjournal.clerk.static-app]}}
                    :js-options {:output-feature-set :es8}}}}

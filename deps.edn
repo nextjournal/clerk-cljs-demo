@@ -4,8 +4,12 @@
  {:dev {:extra-paths ["dev"]
         :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"/js/viewer.js\"}"]}
 
+  :gh-pages {:exec-fn nextjournal.clerk/build!
+             :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"viewer.js\"}"]
+             :exec-args {:paths ["notebooks/**"]}}
+
   :shadow {:jvm-opts ["-Dpolyglot.engine.WarnInterpreterOnly=false" "-XX:-OmitStackTraceInFastThrow"]
-           :main-opts ["-m" "shadow.cljs.devtools.cli" "watch" "viewer"]
+           :main-opts ["-m" "shadow.cljs.devtools.cli"]
            :extra-deps {io.github.nextjournal/clerk.render
                         {:git/url "https://github.com/nextjournal/clerk"
                          :git/sha "d960dd73a71cfa97c5fd01ca9224d0f291e0c0fd"
