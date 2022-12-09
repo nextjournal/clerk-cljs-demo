@@ -35,7 +35,7 @@ jobs:
           key: ${{ runner.os }}-clerk
 
       - name: 🏗 Compile CLJS
-        run: clojure -M:shadow release viewer
+        run: yarn install && clojure -M:shadow release viewer
 
       - name: 🏗 Clerk Build
         run: clojure -X:gh-pages :git/url "https://github.com/nextjournal/clerk-cljs-demo" :git/sha '"${{ github.sha }}"'
