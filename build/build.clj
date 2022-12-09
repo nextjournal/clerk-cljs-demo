@@ -6,7 +6,7 @@
             [nextjournal.clerk.config :as config]))
 
 (defn build! [opts]
-  (sh "yarn" "install")
+  (sh "npm" "install")
   (shadow/release! :viewer)
   (let [cas
         (nextjournal.clerk.viewer/store+get-cas-url! {:out-path "public/build" :ext "js"}
