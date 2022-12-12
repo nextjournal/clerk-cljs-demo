@@ -8,8 +8,8 @@
 (defn build! [opts]
   (sh "npm" "install")
   (shadow/release! :viewer)
-  (let [cas
-        (nextjournal.clerk.viewer/store+get-cas-url! {:out-path "public/build" :ext "js"}
+  (let [js-resource-url
+        (nextjournal.clerk.viewer/store+get-cas-url! (assoc opts :ext "js")
                                                      (fs/read-all-bytes "public/build/viewer.js"))]
-    (swap! config/!resource->url assoc "/js/viewer.js" cas)
+    (swap! config/!resource->url assoc "/js/viewer.js" js-resource-url)
     (clerk/build! (merge {:paths ["notebooks/**"]} opts))))
