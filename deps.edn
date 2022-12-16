@@ -1,5 +1,5 @@
 {:paths ["src" "notebooks"]
- :deps {io.github.nextjournal/clerk {:git/sha "d8dd28c5f9fa1130630eaf62456d0f471704c061"}}
+ :deps {io.github.nextjournal/clerk {:git/sha "8c3ca7c10d0c1325e10031c711f3c23df846b952"}}
  :aliases
  {:dev {:extra-paths ["dev"]
         :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"/js/viewer.js\"}"]}
