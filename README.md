@@ -2,6 +2,8 @@
 
 This project documents best practices for a number of Clerk use cases.
 
+- TODO add kondo config for clerk to template
+
 ## Usage
 
 ## Templates
@@ -15,6 +17,12 @@ clojure -Sdeps '{:deps {io.github.nextjournal/clerk-cljs-demo {:local/root "./cl
     :template clerk/notebook \
     :name myusername/mycoollib
 ```
+
+Each `template.edn` has key-value pairs that you can override.
+
+Relevant:
+
+- `:port 1234`, for example, overrides the default port.
 
 ### Dev
 
