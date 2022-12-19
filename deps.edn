@@ -1,16 +1,19 @@
-{:paths ["src" "notebooks"]
- :deps {io.github.nextjournal/clerk {:git/sha "8c3ca7c10d0c1325e10031c711f3c23df846b952"}}
+{:paths ["src" "notebooks" "resources"]
+ :deps {io.github.nextjournal/clerk
+        {:git/sha "8c3ca7c10d0c1325e10031c711f3c23df846b952"}}
  :aliases
  {:dev {:extra-paths ["dev"]
         :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"/js/viewer.js\"}"]}
 
-  :gh-pages {:exec-fn nextjournal.clerk/build!
-             :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"viewer.js\"}"]
-             :exec-args {:paths ["notebooks/**"]}}
+  :gh-pages
+  {:exec-fn nextjournal.clerk/build!
+   :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"viewer.js\"}"]
+   :exec-args {:paths ["notebooks/**"]}}
 
-  :nextjournal/clerk {:exec-fn build/build!
-                      :extra-paths ["build"]
-                      :nextjournal.clerk/aliases [:shadow]}
+  :nextjournal/clerk
+  {:exec-fn build/build!
+   :extra-paths ["build"]
+   :nextjournal.clerk/aliases [:shadow]}
 
   :shadow {:jvm-opts ["-Dpolyglot.engine.WarnInterpreterOnly=false" "-XX:-OmitStackTraceInFastThrow"]
            :main-opts ["-m" "shadow.cljs.devtools.cli"]
