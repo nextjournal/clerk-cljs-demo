@@ -16,6 +16,12 @@ clojure -Sdeps '{:deps {io.github.nextjournal/clerk-cljs-demo {:local/root "./cl
     :name myusername/mycoollib
 ```
 
+Each `template.edn` has key-value pairs that you can override.
+
+Relevant:
+
+- `:port 1234`, for example, overrides the default port.
+
 ### Dev
 
 Start shadow watcher
