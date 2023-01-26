@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><title>Clerk</title><meta charset="UTF-8"><meta content="width=device-width, initial-scale=1" name="viewport"><meta content="and much more..." property="og:description"><meta property="og:title"><meta content="article:clerk" property="og:type"><meta content="summary_large_image" name="twitter:card"><script src="https://cdn.tailwindcss.com?plugins=typography" type="text/javascript"></script><script>tailwind.config = {
+<html><head><title>Clerk</title><meta charset="UTF-8"><meta content="width=device-width, initial-scale=1" name="viewport"><script src="https://cdn.tailwindcss.com?plugins=typography" type="text/javascript"></script><script>tailwind.config = {
   darkMode: "class",
   content: ["./tw/viewer.js", "./tw/**/*.edn"],
   safelist: ['dark'],
@@ -303,7 +303,7 @@
 
 .viewer-notebook { @apply py-16; }
 #clerk-static-app .viewer-notebook { @apply pt-[0.8rem] pb-16; }
-.viewer-markdown *:first-child:not(.viewer-code):not(li):not(h2) { @apply mt-0; }
+.viewer-markdown *:first-child:not(.viewer-code):not(li):not(h2):not(.sidenote) { @apply mt-0; }
 /*.viewer + .viewer { @apply mt-6; }*/
 .viewer + .viewer-result { @apply mt-0; }
 .viewer-code + .viewer-result { @apply mt-3; }
@@ -313,24 +313,35 @@
 /* --------------------------------------------------------------- */
 
 .sidenote-ref {
-  @apply top-[-3px] inline-flex justify-center items-center w-[18px] h-[18px]
-    rounded-full bg-slate-100 border border-slate-300 hover:bg-slate-200 hover:border-slate-300
-    m-0 ml-[4px] cursor-pointer;
+  @apply top-[-0.5em] w-auto h-auto inline border-0 bg-transparent m-0 pointer-events-none;
 }
 .sidenote {
-  @apply hidden float-left clear-both mx-[2.5%] my-4 text-xs relative w-[95%];
+  @apply block font-sans text-xs mt-4 bg-slate-100 dark:bg-slate-800 p-4;
+  font-style: normal;
+  font-weight: normal;
 }
-.sidenote-ref.expanded + .sidenote {
-  @apply block;
+.sidenote-container {
+  @apply mb-4;
 }
 @media (min-width: 860px) {
-  .sidenote-ref {
-    @apply top-[-0.5em] w-auto h-auto inline border-0 bg-transparent m-0 pointer-events-none;
-  }
   .sidenote sup { @apply inline; }
-  .viewer-markdown .contains-sidenotes p { @apply max-w-[65%]; }
-  .viewer-markdown p .sidenote {
-    @apply mr-[-54%] mt-[0.2rem] w-1/2 float-right clear-right relative block;
+  .sidenote-column {
+    @apply w-[165px] absolute right-0 top-0 -mr-[205px];
+  }
+  .sidenote {
+    @apply bg-transparent dark:bg-transparent p-0;
+  }
+  .sidenote:first-child {
+    @apply mt-1;
+  }
+  .sidenotes-layout .viewer-markdown {
+    @apply pr-[205px];
+  }
+  .sidenote-container {
+    @apply relative mb-0;
+  }
+  .sidenotes-layout h1 {
+    @apply w-[756px] !important;
   }
 }
 .viewer-code + .viewer:not(.viewer-markdown):not(.viewer-code):not(.viewer-code-folded),
@@ -384,6 +395,6 @@
 .katex * { @apply border-black; }
 </style><script src="viewer.js" type="module"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://fonts.bunny.net" rel="preconnect"><link href="https://fonts.bunny.net/css?family=fira-code:400,700%7Cfira-mono:400,700%7Cfira-sans:400,400i,500,500i,700,700i%7Cfira-sans-condensed:700,700i%7Cpt-serif:400,400i,700,700i" rel="stylesheet" type="text/css"></head><body><div id="clerk-static-app"></div><script type="module">let viewer = nextjournal.clerk.sci_env
 let app = nextjournal.clerk.static_app
-let opts = viewer.read_string("{:out-path \"public/build\", :path->doc {\"notebooks/clerk_cljs_demo/test_notebook.clj\" {:path [], :nextjournal/value {:toc {:type :toc}, :toc-visibility false, :atom-var-name->state #viewer-eval (nextjournal.clerk.render/intern-atoms! {}), :auto-expand-results? nil, :scope {:namespace :clerk-cljs-demo.test-notebook}, :bundle? false, :open-graph {:type \"article:clerk\", :title nil, :description \"and much more...\"}, :blocks [{:nextjournal/value \"(ns clerk-cljs-demo.test-notebook\\n  (:require [nextjournal.clerk :as clerk]))\", :nextjournal/opts {:loc {:line 1, :column 1}}, :nextjournal/viewer {:name :code, :render-fn #viewer-fn nextjournal.clerk.render/render-code, :hash \"5duGVW4Xoi1QoW73J5wMRghqm9uVoW\"}} {:nextjournal/value \"(clerk/with-viewer\\n '(fn [_ _] [:h1 clerk-cljs-demo.viewers-lib/header]) nil)\", :nextjournal/opts {:loc {:line 4, :column 1}}, :nextjournal/viewer {:name :code, :render-fn #viewer-fn nextjournal.clerk.render/render-code, :hash \"5duGVW4Xoi1QoW73J5wMRghqm9uVoW\"}} {:path [], :nextjournal/value {:nextjournal/presented {:path [], :nextjournal/value nil, :nextjournal/viewer {:render-fn #viewer-fn (fn [_ _] [:h1 clerk-cljs-demo.viewers-lib/header]), :hash \"5duEb8xsvGkYjRggnzrHiMfNJzQx24\"}}}, :nextjournal/viewer {:name :clerk/result, :render-fn #viewer-fn nextjournal.clerk.render/render-result, :hash \"5drtBjvRGKwhUFrDTtWvTAduWDETV1\"}} {:nextjournal/value [:div.viewer-markdown [:p [:span \"and much more...\"]]], :nextjournal/viewer {:name :html-, :render-fn #viewer-fn identity, :hash \"5dsKyVZX2dPvsyoeg6dNrfeuqAh5UK\"}}], :css-class nil}, :nextjournal/viewer {:name :clerk/notebook, :render-fn #viewer-fn nextjournal.clerk.render/render-notebook, :hash \"5dt1qwFEn2BQwdEM84VqwY4LR6p4YV\"}}}, :index \"notebooks/clerk_cljs_demo/test_notebook.clj\", :browse? false, :git/url \"https://github.com/nextjournal/clerk-cljs-demo\", :paths [\"notebooks/clerk_cljs_demo/test_notebook.clj\"], :resource->url {\"/js/viewer.js\" \"viewer.js\"}, :current-path \"notebooks/clerk_cljs_demo/test_notebook.clj\", :bundle? false, :git/sha \"5bd428c53648a0881b24aa546e41f781e37185ab\", :path->url {\"notebooks/clerk_cljs_demo/test_notebook.clj\" \"\"}, :expanded-paths [\"notebooks/clerk_cljs_demo/test_notebook.clj\"], :report-fn #object[nextjournal.clerk.builder$stdout_reporter 0x509c1d50 \"nextjournal.clerk.builder$stdout_reporter@509c1d50\"]}")
+let opts = viewer.read_string("{:out-path \"public/build\", :browse? false, :git/url \"https://github.com/nextjournal/clerk-cljs-demo\", :paths [\"notebooks/markdown.md\" \"notebooks/clerk_cljs_demo/test_notebook.clj\"], :resource->url {\"/js/viewer.js\" \"viewer.js\"}, :bundle? false, :git/sha \"dca41a31ad48839517919e925c63326685ce6566\", :path->url {\"notebooks/markdown.md\" \"notebooks/markdown.html\", \"notebooks/clerk_cljs_demo/test_notebook.clj\" \"notebooks/clerk_cljs_demo/test_notebook.html\"}, :expanded-paths [\"notebooks/markdown.md\" \"notebooks/clerk_cljs_demo/test_notebook.clj\"], :report-fn #object[nextjournal.clerk.builder$stdout_reporter 0x6ea248fd \"nextjournal.clerk.builder$stdout_reporter@6ea248fd\"]}")
 app.init(opts)
 </script></body></html>
