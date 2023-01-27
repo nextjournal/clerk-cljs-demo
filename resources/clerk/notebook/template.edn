@@ -1,0 +1,9 @@
+;; Now we are here into transforms etc, this is the actual template stuffed into
+;; the reosurces!!
+
+{:description "FIXME: Clerk notebook template docstring."
+ :port 7777
+ :cname ""
+ :transform
+ [["src" "src/{{top/file}}"
+   {"main.clj" "{{main/file}}.clj"}]]}
