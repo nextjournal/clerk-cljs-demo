@@ -19,5 +19,5 @@
            :main-opts ["-m" "shadow.cljs.devtools.cli"]
            :extra-deps {io.github.nextjournal/clerk.render
                         {:git/url "https://github.com/nextjournal/clerk"
-                         :git/sha "d960dd73a71cfa97c5fd01ca9224d0f291e0c0fd"
+                         :git/sha "990749d3218b35765d8f9d8a826638e53f6d552d"
                          :deps/root "render"}}}}}
