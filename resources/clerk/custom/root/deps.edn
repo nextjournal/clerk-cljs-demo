@@ -3,7 +3,8 @@
         io.github.nextjournal/clerk {:git/sha "{{clerk-sha}}"}}
  :aliases
  {:dev
-  {:extra-deps
+  {:jvm-opts ["-Dpolyglot.engine.WarnInterpreterOnly=false" "-XX:-OmitStackTraceInFastThrow"]
+   :extra-deps
    {org.slf4j/slf4j-nop {:mvn/version "1.7.36"}
 
     io.github.nextjournal/clerk.render

@@ -1,3 +1,5 @@
 # Vanilla Clerk Template
 
-TODO more docs.
+TODO:
+
+- docs on template options
