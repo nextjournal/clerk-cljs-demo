@@ -2,10 +2,8 @@
 ;; the reosurces!!
 
 {:description "FIXME: Clerk notebook template docstring."
- :port 1234
+ :port 7777
  :cname ""
  :transform
  [["src" "src/{{top/file}}"
-   {"main.clj" "{{main/file}}.clj"}]
-  ["test" "test/{{top/file}}"
-   {"main_test.clj" "{{main/file}}_test.clj"}]]}
+   {"main.clj" "{{main/file}}.clj"}]]}
