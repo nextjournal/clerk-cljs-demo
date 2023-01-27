@@ -1,36 +1,31 @@
-{:pods {clj-kondo/clj-kondo {:version "2022.12.10"}}
+{:pods {clj-kondo/clj-kondo {:version "2023.01.20"}}
  :tasks
  {:requires ([pod.borkdude.clj-kondo :as clj-kondo])
-  start-clerk
-  {:doc "Start a Clerk dev server configured with this project's custom JS."
-   :task
-   (shell "clojure -X:nextjournal/clerk user/start!")}
+  :init
+  (defn X [cmd]
+    (let [args *command-line-args*]
+      (if (even? (count args))
+        (apply shell cmd args)
+        (do (println "Please supply an even number of arguments!")
+            (System/exit 1)))))
 
-  publish-gh-pages
+  clerk-watch
+  {:doc "Start a Clerk dev server. Any options supplied are passed to `clerk/serve!`."
+   :task (X "clojure -X:dev:watch")}
+
+  build-static
   {:doc "Generate a fresh static build."
    :task
-   (do (apply shell
-              "clojure -X:dev:nextjournal/clerk user/static-build!"
-              *command-line-args*)
+   (do (X "clojure -X:dev:nextjournal/clerk")
        (spit "./public/CNAME" "{{cname}}"))}
 
   release-gh-pages
   {:doc "Generate a fresh static build and release it to Github Pages."
    :task
    (do (shell "rm -rf public")
-       (run 'publish-gh-pages)
+       (run 'build-static)
+       (shell "npm install")
        (shell "npm run gh-pages"))}
-
-  publish-local
-  {:doc "Generate a fresh static build in the `public` folder and start a local
-  webserver."
-   :task
-   (do (run 'publish-gh-pages)
-       (shell "npm run serve"))}
-
-  release
-  {:doc "Release the library to Clojars."
-   :task (shell "clojure -T:build publish")}
 
   lint
   {:doc "Lint the src and dev directories with clj-kondo."

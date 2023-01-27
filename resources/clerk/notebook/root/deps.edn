@@ -3,14 +3,19 @@
         io.github.nextjournal/clerk
         {:git/sha "75f073c4899e37b2259cb2057cbf863b90892897"}}
  :aliases
- {:nextjournal/clerk
+ {:dev
+  {:extra-deps
+   {org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}}
+
+  ;; This alias is used by https://clerk.garden/.
+  :nextjournal/clerk
+  {:exec-fn nextjournal.clerk/build!
+   :exec-args {:paths    ["src/**"]
+               :out-path "public"}}
+
+  :watch
   {:extra-deps
    {org.babashka/cli    {:mvn/version "0.5.40"}
     org.slf4j/slf4j-nop {:mvn/version "1.7.36"}}
-   :exec-fn nextjournal.clerk/build!
-   :main-opts ["-m" "babashka.cli.exec"]
-   :exec-args
-   ;; TODO fill in index, paths
-   {
-    :index ""
-    :paths [""]}}}}
+   :exec-fn   user/start!
+   :exec-args {:watch-paths ["src"]}}}}

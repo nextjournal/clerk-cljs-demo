@@ -1,6 +1,10 @@
+;; # Welcome to Clerk!
+
 (ns {{top/ns}}.{{main/ns}})
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (prn x "Hello, World!"))
+;; This is some Markdown.
+
+(defn hello [s]
+  (str "Hello, " s "!"))
+
+(hello "Clerk")

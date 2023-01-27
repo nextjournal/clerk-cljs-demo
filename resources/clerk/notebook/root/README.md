@@ -1,12 +1,98 @@
 # {{raw-name}}
 
+[![License][license]][license-url]
+
 {{description}}
 
-## Usage
+This project is powered by Clerk. Your first notebook lives at
+`src/{{top/file}}/{{main/file}}.clj`.
 
-FIXME: write usage documentation!
+## Dependencies
 
-TODO note that this project is a basic notebook. Let's start here.
+`clj`, `shadow-cljs`, `node` and
+
+- [Clojure CLI tools](https://clojure.org/guides/install_clojure)
+- [`babashka`](https://github.com/babashka/babashka#installation)
+
+To publish to GitHub Pages, you'll also need `node` installed, preferably via
+[`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+## Developing with Clerk
+
+To start a server for local Clerk development, run
+
+```sh
+bb start-clerk
+```
+
+This will start the Clerk server at http://localhost:{{port}} with a file
+watcher that updates the page each time any file in the `src` directory changes.
+
+To manually start the Clerk webserver, start a REPL by running
+
+```sh
+clj
+```
+
+Then start the server:
+
+```clj
+(start!)
+```
+
+To show a file, pass it to `clerk/show!`:
+
+```clj
+(clerk/show! "src/{{top/file}}/{{main/file}}.clj")
+```
+
+These commands work because dev/user.clj requires `nextjournal.clerk` under a
+`clerk` alias, and defines a `start!` function.
+
+## Static Builds
+
+### Local Build
+
+Run
+
+```
+bb build-static
+```
+
+To generate a static site locally.
+
+### Push to GitHub
+
+Create a repo at https://github.com/new.
+
+### Garden
+
+The easiest way to share a static build is to push to GitHub, then visit
+
+https://github.clerk.garden/{{raw-name}}
+
+
+### GitHub Pages
+
+To release to GitHub Pages, run
+
+```
+bb release-gh-pages
+```
+
+## Linting
+
+Run
+
+```
+clj-kondo --copy-configs --dependencies --lint "$(clojure -Spath)"
+```
+
+Then
+
+```
+bb lint
+```
 
 ## License
 
@@ -18,3 +104,6 @@ _Feel free to remove or change the `LICENSE` file and remove or update this_
 _section of the `README.md` file!_
 
 Distributed under the Eclipse Public License version 1.0.
+
+[license]: https://img.shields.io/badge/License-EPL%201.0-green.svg
+[license-url]: LICENSE
