@@ -14,21 +14,21 @@ clojure -Sdeps '{:deps {io.github.nextjournal/clerk-cljs-demo {:local/root "./cl
 ## Publishing to Clojars
 
 The template for the project's `pom.xml` lives at
-[`template/pom.xml`](https://github.com/mentat-collective/mafs.cljs/blob/main/template/pom.xml).
+[`template/pom.xml`](https://github.com/nextjournal/clerk-cljs-demo/blob/main/template/pom.xml).
 
 To create a new release:
 
 - Update the version in
-  [build.clj](https://github.com/mentat-collective/mafs.cljs/blob/main/build.clj)
+  [build.clj](https://github.com/nextjournal/clerk-cljs-demo/blob/main/build.clj)
 - Make a new [Github
-  Release](https://github.com/mentat-collective/mafs.cljs/releases) with tag
+  Release](https://github.com/nextjournal/clerk-cljs-demo/releases) with tag
   `v<the-new-version>`.
 
 Submitting the release will create the new tag and trigger the following
 command:
 
 ```
-bb release
+clojure -T:build publish
 ```
 
 The new release will appear on Clojars.
