@@ -9,8 +9,8 @@
 (defn build! [opts]
   (sh "npm" "install")
   (shadow/release! :viewer)
-  (let [js-resource-url (clerk.viewer/store+get-cas-url! (assoc opts :ext "js")
-                                                         (fs/read-all-bytes "public/build/viewer.js"))]
-    (clerk/build! (-> opts
-                      (assoc :paths ["notebooks/**"])
-                      (update :resource->url assoc "/js/viewer.js" js-resource-url)))))
+  (clerk/build! (-> opts
+                    (assoc :paths ["notebooks/**"] :compile-css? true)
+                    (assoc-in [:resource->url "/js/viewer.js"]
+                              (clerk.viewer/store+get-cas-url! (assoc opts :ext "js")
+                                                               (fs/read-all-bytes "public/build/viewer.js"))))))

@@ -1,12 +1,8 @@
 {:paths ["src" "notebooks"]
- :deps {io.github.nextjournal/clerk {:git/sha "990749d3218b35765d8f9d8a826638e53f6d552d"}}
+ :deps {io.github.nextjournal/clerk {:git/sha "501f75345122151dcd3c7a5518f50f66b8ff2731"}}
  :aliases
  {:dev {:extra-paths ["dev"]
         :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"/js/viewer.js\"}"]}
-
-  :gh-pages {:exec-fn nextjournal.clerk/build!
-             :jvm-opts ["-Dclerk.resource_manifest={\"/js/viewer.js\" \"viewer.js\"}"]
-             :exec-args {:paths ["notebooks/**"]}}
 
   :nextjournal/clerk {:exec-fn build/build!
                       :extra-paths ["build"]

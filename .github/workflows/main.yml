@@ -6,12 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🛎 ️Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🔧 Install java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: '11.0.7'
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: 🔧 Install clojure
         uses: DeLaGuardo/setup-clojure@master
@@ -19,7 +20,7 @@ jobs:
           cli: '1.10.3.943'
 
       - name: 🗝 maven cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.m2
@@ -28,17 +29,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: 🗝 Clerk Cache
-        uses: actions/cache@v2
-        with:
-          path: .cache
-          key: ${{ runner.os }}-clerk
+      - name: 🌬Make Tailwind bin available
+        run: yarn global add tailwindcss @tailwindcss/typography
 
-      - name: 🏗 Compile CLJS
-        run: yarn install && clojure -M:shadow release viewer
+      - name: 🧶 Install Deps
+        run: yarn install
 
       - name: 🏗 Clerk Build
-        run: clojure -X:gh-pages :git/url '"https://github.com/nextjournal/clerk-cljs-demo"' :git/sha '"${{ github.sha }}"'
+        run: NODE_PATH=$(yarn global dir)/node_modules clojure -X:shadow:nextjournal/clerk :out-path '"public/build"' :git/url '"https://github.com/nextjournal/clerk-cljs-demo"' :git/sha '"${{ github.sha }}"'
 
       - name: 🚀 Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.6
